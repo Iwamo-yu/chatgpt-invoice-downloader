@@ -1,0 +1,34 @@
+[project]
+name = "chatgpt-invoice-downloader"
+version = "0.1.0"
+description = "Download ChatGPT web subscription invoices using a saved Playwright session."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "google-api-python-client>=2.176.0",
+  "google-auth>=2.40.3",
+  "google-auth-oauthlib>=1.2.2",
+  "playwright>=1.54.0",
+  "python-dotenv>=1.1.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.4.1",
+]
+
+[project.scripts]
+invoice-downloader = "invoice_downloader.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/invoice_downloader"]
+
+[tool.pytest.ini_options]
+addopts = "-p no:capture -p no:debugging"
+markers = [
+  "manual_e2e: manual end-to-end tests that require a real browser session",
+]
